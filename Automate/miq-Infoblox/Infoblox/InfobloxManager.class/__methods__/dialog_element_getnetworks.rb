@@ -53,16 +53,25 @@ rescue Exception => e
   exit MIQ_STOP
 end
 
+# build the dialog values hash
+begin
+  dialog_values_hash = {}
+  networks.each do |n|
+    dialog_values_hash[n._ref] = n.networks
+  end
 
+  list_values = {
+     'sort_by'    => :value,
+     'data_type'  => :string,
+     'required'   => false,
+     'values'     => dialog_values_hash
+  }
+  list_values.each { |key, value| $evm.object[key] = value }
 
+  log(:info, "Dynamic Element values: #{$evm.object['values']}")
 
+  return $evm.object['values']
 
-dialog_field = $evm.object
-dialog_field['values'] = networks.keys
-$evm.object["sort_by"] = "description"
-$evm.object["sort_order"] = "ascending"
-$evm.object["data_type"] = "string"
-$evm.object["required"] = "true"
-
-log(:info, "Dynamic Element values: #{$evm.object['values']}")
-return $evm.object['values']
+rescue Exception => e
+  $evm.log(:error, "ERROR: Cannot build dialog values hash.\n e.message \n e.backtrace.inspect")
+end
