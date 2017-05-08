@@ -45,33 +45,10 @@ rescue Exception => e
   exit MIQ_STOP
 end
 
-# get all of the networks
 begin
-  networks = Infoblox::Network.all(infoblox_connection, { _max_results: 9999 })
+  grid = Infoblox::Grid.get(infoblox_connection)
+  ref = grid[0].restartservices(member_order = "SEQUENTIALLY",restart_option = "RESTART_IF_NEEDED", sequential_delay = 10, service_option = "DHCP")
+  $evm.log(:info, "Restarted Infoblox DHCP Grid Services")
 rescue Exception => e
-  $evm.log(:error, "ERROR: cannot get Infoblox networks. \n #{e.message} \n #{e.backtrace.inspect}")
-  exit MIQ_STOP
-end
-
-# build the dialog values hash
-begin
-  dialog_values_hash = {}
-  networks.each do |n|
-    dialog_values_hash[n._ref] = n.networks
-  end
-
-  list_values = {
-     'sort_by'    => :value,
-     'data_type'  => :string,
-     'required'   => false,
-     'values'     => dialog_values_hash
-  }
-  list_values.each { |key, value| $evm.object[key] = value }
-
-  log(:info, "Dynamic Element values: #{$evm.object['values']}")
-
-  return $evm.object['values']
-
-rescue Exception => e
-  $evm.log(:error, "ERROR: Cannot build dialog values hash.\n e.message \n e.backtrace.inspect")
+  $evm.log(:error, "ERROR: Problem restarting Grid Services. \n #{e.message} \n #{e.backtrace.inspect}")
 end

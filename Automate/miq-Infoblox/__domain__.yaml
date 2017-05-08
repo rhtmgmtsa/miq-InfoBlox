@@ -4,8 +4,10 @@ version: 1.0
 object:
   attributes:
     name: miq-Infoblox
-    description:
-    display_name:
-    system: false
-    priority: 2
+    description: 
+    display_name: 
+    priority: 5
     enabled: true
+    tenant_id: 20000000000002
+    source: user
+    top_level_namespace: 

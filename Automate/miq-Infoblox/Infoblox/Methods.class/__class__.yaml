@@ -5,42 +5,22 @@ object:
   attributes:
     description: 
     display_name: 
-    name: InfobloxManager
+    name: Methods
     type: 
     inherits: 
     visibility: 
     owner: 
   schema:
   - field:
-      aetype: assertion
-      name: eval
+      aetype: attribute
+      name: servername
       display_name: 
       datatype: string
       priority: 1
       owner: 
-      default_value: 
+      default_value: infoblox.example.com
       substitute: true
-      message: "*"
-      visibility: 
-      collect: 
-      scope: 
-      description: 
-      condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: 
-      max_time: 
-  - field:
-      aetype: attribute
-      name: hostname
-      display_name: 
-      datatype: string
-      priority: 2
-      owner: 
-      default_value: 192.168.1.2
-      substitute: true
-      message: "*"
+      message: create
       visibility: 
       collect: 
       scope: 
@@ -56,11 +36,11 @@ object:
       name: username
       display_name: 
       datatype: string
-      priority: 3
+      priority: 2
       owner: 
       default_value: admin
       substitute: true
-      message: "*"
+      message: create
       visibility: 
       collect: 
       scope: 
@@ -76,11 +56,11 @@ object:
       name: password
       display_name: 
       datatype: password
-      priority: 4
+      priority: 3
       owner: 
-      default_value: v2:{FeQ7MT/rGbNn1PWoEvTDjg==}
+      default_value: v1:{o3WJPVTn5+vX6FFWAd1Auw==}
       substitute: true
-      message: "*"
+      message: create
       visibility: 
       collect: 
       scope: 
@@ -93,14 +73,114 @@ object:
       max_time: 
   - field:
       aetype: attribute
-      name: required
+      name: api_version
+      display_name: 
+      datatype: string
+      priority: 4
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: dns_domain
       display_name: 
       datatype: string
       priority: 5
       owner: 
-      default_value: 'true'
+      default_value: example.com
       substitute: true
-      message: "*"
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: view
+      display_name: 
+      datatype: string
+      priority: 6
+      owner: 
+      default_value: default
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: to_email_address
+      display_name: 
+      datatype: string
+      priority: 7
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: from_email_address
+      display_name: 
+      datatype: string
+      priority: 8
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: signature
+      display_name: 
+      datatype: string
+      priority: 9
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
       visibility: 
       collect: 
       scope: 
@@ -116,11 +196,11 @@ object:
       name: method1
       display_name: 
       datatype: string
-      priority: 6
+      priority: 10
       owner: 
       default_value: 
       substitute: true
-      message: "*"
+      message: create
       visibility: 
       collect: 
       scope: 
@@ -136,31 +216,11 @@ object:
       name: method2
       display_name: 
       datatype: string
-      priority: 7
+      priority: 11
       owner: 
       default_value: 
       substitute: true
-      message: "*"
-      visibility: 
-      collect: 
-      scope: 
-      description: 
-      condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: 
-      max_time: 
-  - field:
-      aetype: method
-      name: method3
-      display_name: 
-      datatype: string
-      priority: 8
-      owner: 
-      default_value: 
-      substitute: true
-      message: "*"
+      message: create
       visibility: 
       collect: 
       scope: 

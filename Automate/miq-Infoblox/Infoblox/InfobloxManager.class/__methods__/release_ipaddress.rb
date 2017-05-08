@@ -15,6 +15,7 @@
 # Author: Greg Jones <gjones@redhat.com>
 #
 
+
 required_gems = ["infoblox"]
 
 # Make sure we can load gems in required_gems[] and load them
@@ -43,35 +44,4 @@ begin
 rescue Exception => e
   $evm.log(:error, "ERROR: Cannot create new connection to #{host}.\n #{e.message} \n #{e.backtrace.inspect}")
   exit MIQ_STOP
-end
-
-# get all of the networks
-begin
-  networks = Infoblox::Network.all(infoblox_connection, { _max_results: 9999 })
-rescue Exception => e
-  $evm.log(:error, "ERROR: cannot get Infoblox networks. \n #{e.message} \n #{e.backtrace.inspect}")
-  exit MIQ_STOP
-end
-
-# build the dialog values hash
-begin
-  dialog_values_hash = {}
-  networks.each do |n|
-    dialog_values_hash[n._ref] = n.networks
-  end
-
-  list_values = {
-     'sort_by'    => :value,
-     'data_type'  => :string,
-     'required'   => false,
-     'values'     => dialog_values_hash
-  }
-  list_values.each { |key, value| $evm.object[key] = value }
-
-  log(:info, "Dynamic Element values: #{$evm.object['values']}")
-
-  return $evm.object['values']
-
-rescue Exception => e
-  $evm.log(:error, "ERROR: Cannot build dialog values hash.\n e.message \n e.backtrace.inspect")
 end

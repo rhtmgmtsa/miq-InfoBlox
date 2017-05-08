@@ -1,0 +1,14 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: WorkFlowReserveAddress
+    inherits: 
+    description: 
+  fields:
+  - method1:
+      value: reserve_ipaddress
+  - method3:
+      value: restart_grid_services
